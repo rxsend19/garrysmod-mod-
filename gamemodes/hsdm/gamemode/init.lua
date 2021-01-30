@@ -27,7 +27,36 @@ HSDM_USER_PLAYERMODELS = {
 "models/player/urban.mdl"
 }
 
-function GM:PlayerSpawn(ply)
+function GM:PlayerLoadout(nextoren)
+
+    --if nextoren:Team() == 1 then
+
+ 		nextoren:StripWeapons()
+        	nextoren:Give("weapon_crowbar")
+ 		nextoren:Give("weapon_pistol")
+		nextoren:Give("weapon_357")
+ 		nextoren:GiveAmmo(48, "Pistol", true)
+		nextoren:GiveAmmo(24, "357", true)
+ 		nextoren:EquipSuit()
+    --end
+ 
+end
+
+for adidas=1, 6 do
+	team.SetSpawnPoint( adidas, {"info_player_start"} )
+end
+
+function GM:PlayerSpawn(ply)	
+ply:Freeze(false)
+ply:AllowFlashlight(true)
+ply:SetupHands()
+ply:SetCanZoom(true)
+ply:SetJumpPower(150)
+ply:SetCrouchedWalkSpeed(0.2)
+ply:SetRunSpeed(260)
+ply:SetWalkSpeed(120)
+ply:SetMaxSpeed(260)
+	
     if ply:IsUserGroup("superadmin") then
     	ply:SetTeam(6)
   	elseif ply:IsUserGroup("admin") then
@@ -41,29 +70,6 @@ function GM:PlayerSpawn(ply)
     else
     	ply:SetTeam(1)
     end
-end
-
-function GM:PlayerLoadout(nextoren)
-
-    --if nextoren:Team() == 1 then
-
- 		nextoren:StripWeapons()
-        nextoren:Give("weapon_crowbar")
- 		nextoren:Give("weapon_pistol")
- 		nextoren:GiveAmmo(48, "Pistol", true)
- 		nextoren:EquipSuit()
-    --end
- 
-end
-
-for adidas=1, 6 do
-	team.SetSpawnPoint( adidas, {"info_player_start"} )
-end
-
-function GM:PlayerSpawn(ply)
-	ply:Freeze(false)
-	ply:AllowFlashlight(true)
-	ply:SetupHands()
 	
 		if ply:IsAdmin() then
 			ply:SetModel(table.Random(HSDM_ADMIN_PLAYERMODELS)
