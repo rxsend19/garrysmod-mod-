@@ -1,1 +1,0 @@
-resource.AddFile("resource/fonts/bauhaus_.ttf") -- шрифт с брича нексто версии 2.5.9
