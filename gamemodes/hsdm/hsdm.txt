@@ -1,1 +1,6 @@
-
+"hsdm"
+{
+	"base"		"base"
+	"title"		"Headshot DeathMatch"
+	"menusystem"	"1"
+}
