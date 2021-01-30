@@ -3,7 +3,29 @@ AddCSLuaFile( "shared.lua" )
 include( "script_init.lua")
 include( "shared.lua" )
 
-hsdm_playermodel = "models/player/leet.mdl"
+HSDM_SUPERADMIN_PLAYERMODELS = {
+"models/player/gman_high.mdl"
+}
+
+HSDM_ADMIN_PLAYERMODELS = {
+"models/player/combine_soldier.mdl",
+"models/player/combine_super_soldier.mdl",
+"models/player/combine_soldier_prisonguard.mdl",
+"models/player/police.mdl"
+}
+
+HSDM_USER_PLAYERMODELS = {
+--t3rr0r1sts
+"models/player/leet.mdl",
+"models/player/phoenix.mdl",
+"models/player/guerilla.mdl",
+"models/player/arctic.mdl",
+--c0unt3r-t3rr0r1sts
+"models/player/gasmask.mdl",
+"models/player/swat.mdl",
+"models/player/riot.mdl",
+"models/player/urban.mdl"
+}
 
 function GM:PlayerSpawn(ply)
     if ply:IsUserGroup("superadmin") then
@@ -34,13 +56,20 @@ function GM:PlayerLoadout(nextoren)
  
 end
 
-for i=1, 6 do
-	team.SetSpawnPoint( i, {"info_player_start"} )
+for adidas=1, 6 do
+	team.SetSpawnPoint( adidas, {"info_player_start"} )
 end
 
-function GM:PlayerSpawn( ply )
-ply:Freeze(false)
-ply:AllowFlashlight(true)
-ply:SetupHands()
-ply:SetModel(hsdm_playermodel)
+function GM:PlayerSpawn(ply)
+	ply:Freeze(false)
+	ply:AllowFlashlight(true)
+	ply:SetupHands()
+	
+		if ply:IsAdmin() then
+			ply:SetModel(table.Random(HSDM_ADMIN_PLAYERMODELS)
+		elseif ply:IsSuperAdmin() then
+			ply:SetModel(table.Random(HDSM_SUPERADMIN_PLAYERMODELS)
+		else
+			ply:SetModel(table.Random(HSDM_USER_PLAYERMODELS)
+		end
 end
