@@ -1,0 +1,7 @@
+SpriteCard
+{
+
+$basetexture "particle/spark"
+$additive 1
+$splinetype 2
+}
